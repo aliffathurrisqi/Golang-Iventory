@@ -1,4 +1,4 @@
-module github.com/aliffathurrisqi/Golang-Iventoryapp
+module github.com/aliffathurrisqi/Golang-Iventory
 
 go 1.19
 

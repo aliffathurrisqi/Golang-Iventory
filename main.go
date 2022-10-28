@@ -3,9 +3,18 @@ package main
 import (
 	"net/http"
 
-	_ "github.com/aliffathurrisqi/Golang-Iventory/controllers/itemcontroler"
+	"github.com/aliffathurrisqi/Golang-Iventory/controllers/itemcontroller"
 )
 
 func main(){
-	http.HandleFunc("/", itemcontroller.index)
+
+	http.HandleFunc("/", itemcontroller.Index)
+
+	http.HandleFunc("/item/add", itemcontroller.Add)
+
+	http.HandleFunc("/item/edit", itemcontroller.Edit)
+
+	http.HandleFunc("/item/delete", itemcontroller.Delete)
+
+	http.ListenAndServe(":3000", nil)
 }

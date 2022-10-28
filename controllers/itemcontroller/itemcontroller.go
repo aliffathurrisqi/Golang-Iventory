@@ -2,18 +2,18 @@ package itemcontroller
 
 import "net/http"
 
-func index(response http.ResponseWriter, request *http.Request){
+func Index(response http.ResponseWriter, request *http.Request){
 
 }
 
-func add(response http.ResponseWriter, request *http.Request){
+func Add(response http.ResponseWriter, request *http.Request){
 	
 }
 
-func edit(response http.ResponseWriter, request *http.Request){
+func Edit(response http.ResponseWriter, request *http.Request){
 
 }
 
-func delete(response http.ResponseWriter, request *http.Request){
+func Delete(response http.ResponseWriter, request *http.Request){
 	
 }
