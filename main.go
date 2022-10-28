@@ -8,6 +8,8 @@ import (
 
 func main(){
 
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
 	http.HandleFunc("/item", itemcontroller.Index)
 
 	http.HandleFunc("/item/add", itemcontroller.Add)

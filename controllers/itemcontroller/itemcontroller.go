@@ -1,14 +1,17 @@
 package itemcontroller
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 
 	"github.com/aliffathurrisqi/Golang-Iventory/entities"
+	"github.com/aliffathurrisqi/Golang-Iventory/models"
 )
 
+var itemModel = models.NewItemModel()
+
 func Index(response http.ResponseWriter, request *http.Request){
+
 	
 	if request.Method == http.MethodGet{
 
@@ -19,6 +22,7 @@ func Index(response http.ResponseWriter, request *http.Request){
 	}
 
 	temp.Execute(response, nil)
+
 	} else if request.Method == http.MethodPost{
 		request.ParseForm()
 
@@ -29,7 +33,7 @@ func Index(response http.ResponseWriter, request *http.Request){
 		item.Price= request.Form.Get("price")
 		item.Stock = request.Form.Get("stock")
 
-		fmt.Println(item)
+		itemModel.Create(item)
 
 		http.Redirect(response, request, "/item", http.StatusFound)
 	}
