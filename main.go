@@ -8,7 +8,7 @@ import (
 
 func main(){
 
-	http.HandleFunc("/", itemcontroller.Index)
+	http.HandleFunc("/item", itemcontroller.Index)
 
 	http.HandleFunc("/item/add", itemcontroller.Add)
 
