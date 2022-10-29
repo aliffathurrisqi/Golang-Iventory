@@ -12,6 +12,12 @@ var itemModel = models.NewItemModel()
 
 func Index(response http.ResponseWriter, request *http.Request){
 
+	item, _ := itemModel.All()
+
+	data := map[string]interface{}{
+		"items" : item,
+		"active" : "Barang",
+	}
 	
 	if request.Method == http.MethodGet{
 
@@ -21,7 +27,7 @@ func Index(response http.ResponseWriter, request *http.Request){
 		panic(err)
 	}
 
-	temp.Execute(response, nil)
+	temp.Execute(response, data)
 
 	} else if request.Method == http.MethodPost{
 		request.ParseForm()

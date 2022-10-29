@@ -9,7 +9,7 @@
     <meta name="keywords"
         content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="/assets/img/logos/logo-smkn-1-godean.png" />
+    <link rel="shortcut icon" href="/assets/img/logos/octomind.png" />
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-profile.html" />
 
@@ -38,21 +38,21 @@
                         Statistik
                     </li>
         
-                    <li class="sidebar-item active">
+                    <li class='sidebar-item'>
                         <a class="sidebar-link" href="">
                             <i class="bi bi-pie-chart align-middle"></i> <span class="align-middle">Dashboard</span>
                         </a>
                     </li>
         
-                    <li class="sidebar-item">
+                    <li class='sidebar-item'>
                         <a class="sidebar-link" href="">
-                            <i class="bi bi-plus-circle align-middle"></i> <span class="align-middle">Barang</span>
+                            <i class="bi bi-box-seam align-middle"></i> <span class="align-middle">Barang</span>
                         </a>
                     </li>
         
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="">
-                            <i class="bi bi-file-earmark-medical align-middle"></i> <span class="align-middle">Jenis</span>
+                            <i class="bi bi-tags align-middle"></i> <span class="align-middle">Jenis</span>
                         </a>
                     </li>
                 </ul>
@@ -77,7 +77,7 @@
                         </a>
         
                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                            <img src="/assets/img/logos/logo-smkn-1-godean.png" class="avatar img-fluid rounded me-1" /> <span
+                            <img src="/assets/img/logos/octomind.png" class="avatar img-fluid rounded me-1" /> <span
                                 class="text-dark">Username</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -111,18 +111,62 @@
                                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Tambah Barang</button>
                                             </div>
 
-                                            <table class="table">
+                                            <table class="table table-bordered">
                                                 <thead>
                                                   <tr>
-                                                    <th scope="col">#</th>
+                                                    <th scope="col">ID</th>
                                                     <th scope="col">Nama Barang</th>
                                                     <th scope="col">Jenis</th>
                                                     <th scope="col">Harga</th>
                                                     <th scope="col">Stok</th>
+                                                    <th scope="col">Aksi</th>
                                                   </tr>
                                                 </thead>
                                                 <tbody>
-                                                
+                                                {{ range .items }}
+                                                    <tr>
+                                                        <td>{{ .Id }}</td>
+                                                        <td>{{ .Name }}</td>
+                                                        <td>{{ .Type_id }}</td>
+                                                        <td>Rp {{ .Price }}</td>
+                                                        <td>{{ .Stock }}</td>
+                                                        <td>
+                                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editItem{{ .Id }}" href>Edit</button>
+                                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItem{{ .Id }}" href>Hapus</button>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    
+                                                    <div class="modal fade" id="editItem{{ .Id }}" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    Edit Barang
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="/item/edit" method="POST">
+                                                    
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="id" value="{{ .Id }}" required>
+                                                                        <input type="text" class="form-control mb-2" name="name" placeholder="Nama Barang" value="{{ .Name }}"
+                                                                            required>
+                                                                        <select class="form-select mb-2" name="type_id">
+                                                                            <option value="1">Makanan & Minuman</option>
+                                                                            <option value="2">Alat Tulis</option>
+                                                                        </select>
+                                                                        <input type="number" class="form-control mb-2" name="price" placeholder="Harga (Rp)" value="{{ .Price }}" required>
+                                                                        <input type="number" class="form-control mb-2" name="stock" placeholder="Jumlah Stok"
+                                                                        value="{{ .Stock}}" required>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {{  end }}
                                                 </tbody>
                                               </table>
                                         </div>
@@ -154,7 +198,7 @@
     </script>
 
 <div class="modal fade" id="addItem" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 Tambah Barang
