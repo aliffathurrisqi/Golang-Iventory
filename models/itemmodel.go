@@ -26,7 +26,7 @@ func NewItemModel() *ItemModel{
 
 func (p *ItemModel) All() ([]entities.Item, error){
 
-	rows, err := p.conn.Query("SELECT * FROM items")
+	rows, err := p.conn.Query("SELECT * FROM items_data")
 
 	if err != nil{
 		return []entities.Item{}, err
@@ -58,4 +58,25 @@ func (p *ItemModel) Create(item entities.Item) bool{
 	lastInsertID, _ := result.LastInsertId()
 
 	return lastInsertID > 0
+}
+
+func (p *ItemModel) Edit(item entities.Item) bool{
+	result, err := p.conn.Exec("UPDATE items SET name = ?, type_id = ?, price = ?, stock = ? WHERE id = ?", 
+	item.Name, item.Type_id, item.Price, item.Stock, item.Id)
+
+	if err != nil{
+		fmt.Println(err)
+		return false
+	}
+
+	lastInsertID, _ := result.LastInsertId()
+
+	return lastInsertID > 0
+}
+
+func (p *ItemModel) Delete(id string){
+	
+	p.conn.Exec("DELETE FROM items WHERE id = ?", 
+	id)
+
 }

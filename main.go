@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/aliffathurrisqi/Golang-Iventory/controllers/itemcontroller"
+	itemcontroller "github.com/aliffathurrisqi/Golang-Iventory/controllers"
 )
 
 func main(){

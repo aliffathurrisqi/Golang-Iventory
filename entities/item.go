@@ -1,7 +1,7 @@
 package entities
 
 type Item struct{
-	Id int64
+	Id string
 	Name string
 	Type_id string
 	Price string

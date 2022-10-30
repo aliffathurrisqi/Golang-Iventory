@@ -39,19 +39,19 @@
                     </li>
         
                     <li class='sidebar-item'>
-                        <a class="sidebar-link" href="">
+                        <a class="sidebar-link" href="/">
                             <i class="bi bi-pie-chart align-middle"></i> <span class="align-middle">Dashboard</span>
                         </a>
                     </li>
         
                     <li class='sidebar-item'>
-                        <a class="sidebar-link" href="">
+                        <a class="sidebar-link" href="/item">
                             <i class="bi bi-box-seam align-middle"></i> <span class="align-middle">Barang</span>
                         </a>
                     </li>
         
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="">
+                        <a class="sidebar-link" href="/type">
                             <i class="bi bi-tags align-middle"></i> <span class="align-middle">Jenis</span>
                         </a>
                     </li>
@@ -132,7 +132,7 @@
                                                         <td>{{ .Stock }}</td>
                                                         <td>
                                                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editItem{{ .Id }}" href>Edit</button>
-                                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItem{{ .Id }}" href>Hapus</button>
+                                                            <a class="btn btn-danger" href="/item/delete?id={{ .Id }}" onclick="return confirm('Apakah anda yakin ingin menghapus {{ .Name }} ?')">Hapus</button>
                                                         </td>
                                                     </tr>
                                                     
@@ -210,8 +210,9 @@
                     <input type="text" class="form-control mb-2" name="name" placeholder="Nama Barang"
                         required>
                     <select class="form-select mb-2" name="type_id">
-                        <option value="1">Makanan & Minuman</option>
-                        <option value="2">Alat Tulis</option>
+                        {{ range .types }}
+                        <option value="{{ .Id }}">{{ .Name }}</option>
+                        {{ end }}
                     </select>
                     <input type="number" class="form-control mb-2" name="price" placeholder="Harga (Rp)" required>
                     <input type="number" class="form-control mb-2" name="stock" placeholder="Jumlah Stok"
